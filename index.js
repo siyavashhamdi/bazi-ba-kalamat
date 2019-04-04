@@ -7223,8 +7223,12 @@ function getWords(letters) {
     letters = letters.split("");
 
     for (let w of mainWords) {
+		let w2 = w;
+        if (w2.startsWith("ال"))
+            w2 = w2.substring(2);
+
         isFound = true;
-        w.split("").forEach(itm => {
+        w2.split("").forEach(itm => {
             if (!letters.includes(itm)) {
                 isFound = false;
                 return;
