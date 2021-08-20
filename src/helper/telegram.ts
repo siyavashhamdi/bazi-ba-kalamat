@@ -45,6 +45,8 @@ export class Telegram {
 
       const command = msgSplitted[0] as TelegramCommands;
 
+      Utils.consoleLog(`SL:1, ${ command }`);
+
       switch (command) {
         case TelegramCommands.start:
           this.sendMessage(chatId, `${ msg?.chat?.first_name } عزیز؛\nبه بات تولید کلمه خوش آمدید.\n\n${ helpText }`);
