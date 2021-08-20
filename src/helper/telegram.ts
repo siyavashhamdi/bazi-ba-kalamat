@@ -70,16 +70,17 @@ export class Telegram {
           const paramLetters = paramsSplitted[1];
 
           const foundRes = Utils.generateLetters(paramNumOfLetters, paramLetters.split(''));
+          const respMsg = `«جستجوی واژه‌های ${ paramNumOfLetters } حرفی برای حرف‌های ${ paramLetters.split('').join('-') }»
 
-          this.sendMessage(chatId, `جستجوی واژه‌های ${ paramNumOfLetters } حرفی برای حرف‌های ${ paramLetters.split('-') }:
+تعداد واژه‌های یافت‌شده: ${ foundRes.length } عدد
 
-تعداد واژه‌های یافت‌شده: ${ foundRes.length }
+لیست واژه‌ها:\n${ foundRes.length ? foundRes.join(', ') : 'واژه‌ای یافت نگردید.' }`;
 
-لیست واژه‌ها: ${ foundRes.length }`);
+          this.sendMessage(chatId, respMsg);
           break;
 
         default:
-          this.sendMessage(chatId, `فرمان وارد شده معتبر نیست!\n\n${ helpText }`);
+          this.sendMessage(chatId, `فرمان وارد شده معتبر نیست!${ helpText } `);
           break;
       }
     });
