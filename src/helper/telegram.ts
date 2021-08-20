@@ -34,6 +34,8 @@ export class Telegram {
 
       if (!isCommandMode) {
         this.sendMessage(chatId, `لطفن برای ارسال فرمان، از کاراکتر / پیش از متن فرمان استفاده شود.\n${ helpText }`);
+
+        return;
       }
 
       const command = match[1] as TelegramCommands;
