@@ -22,8 +22,12 @@ export class Telegram {
       const chatId = msg.chat.id;
 
       switch (command) {
+        case TelegramCommands.start:
+          this.sendMessage(chatId, `Dear ${ msg.first_name }\nWelcome to the Siyavas's bot`);
+          break;
+
         case TelegramCommands.hello:
-          this.sendMessage(chatId, `Hello dear ${ JSON.stringify(msg) }`);
+          this.sendMessage(chatId, `Hello dear ${ JSON.stringify(msg, null, '  ') }`);
           break;
 
         case TelegramCommands.id:
