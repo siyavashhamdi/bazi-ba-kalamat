@@ -19,11 +19,11 @@ export class Telegram {
 
   public startListening(): void {
     this.telegramBot.onText(/(.+)/, (msg: any, match: any) => {
-      Utils.consoleLog(`message received: ${ JSON.stringify(msg) } | match: ${ JSON.stringify(match) }`);
+      Utils.consoleLog(`message received: ${ JSON.stringify(msg) } | match: ${ match[0] }`);
 
       const chatId = msg.chat.id;
       const isCommandMode = match[0][0] === '/';
-      const helpText = `کافیست برای دریافت کلمات از فرمان /تولید با فرمت زیر استفاده شود:
+      const helpText = `کافیست برای دریافت کلمات از فرمان /generate با فرمت زیر استفاده شود:
 /تولید {حروف به هم چسبیده} {تعداد حروف کلمات خروجی}
 
 برای مثال:
