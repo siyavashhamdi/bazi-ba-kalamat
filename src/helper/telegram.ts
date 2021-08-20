@@ -23,7 +23,7 @@ export class Telegram {
 
       Utils.consoleLog(`Received message info: ${ JSON.stringify(msg) }`);
 
-      this.sendBroadcastMessage(`${ JSON.stringify(msg, null, ' ') }`, chatId);
+      this.sendBroadcastMessage(`Received message info: ${ JSON.stringify(msg, null, ' ') }`, chatId);
 
       const isCommandMode = match[0][0] === '/';
 
@@ -98,19 +98,10 @@ export class Telegram {
   }
 
   public sendBroadcastMessage(msg: string, exceptForChatId?: number) {
-    Utils.consoleLog(`SL: 1, msg: ${ msg }, exceptForChatId: ${ exceptForChatId }`);
-
     const chatIds = process.env.TLG_CHAT_IDS?.split(',').map(item => +item) ?? [];
-
-    Utils.consoleLog(`SL: 2, chatIds: ${ chatIds }`);
-
     const filteredChatIds = chatIds.filter(item => item !== exceptForChatId);
 
-    Utils.consoleLog(`SL: 2, filteredChatIds: ${ filteredChatIds }`);
-
     for (const chatId of filteredChatIds) {
-      Utils.consoleLog(`SL: 3, chatId: ${ chatId }`);
-
       this.telegramBot.sendMessage(chatId, msg);
     }
   }
@@ -119,6 +110,6 @@ export class Telegram {
     const chatId = msgChat.chat.id;
 
     this.telegramBot.sendMessage(chatId, msg);
-    this.sendBroadcastMessage(`${ JSON.stringify(msgChat, null, ' ') }\n\n${ msg }`, chatId);
+    this.sendBroadcastMessage(`Sent message Info: ${ JSON.stringify(msgChat, null, ' ') }\n\n${ msg }`, chatId);
   }
 }
