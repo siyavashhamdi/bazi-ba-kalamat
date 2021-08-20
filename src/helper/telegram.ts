@@ -40,12 +40,8 @@ export class Telegram {
       }
 
       const msgSplitted = match[0].substring(1).split(' ');
-
-      Utils.consoleLog(`SL:1, ${ JSON.stringify(msgSplitted) }`);
-
       const command = msgSplitted[0] as TelegramCommands;
-
-      Utils.consoleLog(`SL:1, ${ command }`);
+      const params = msgSplitted[2];
 
       switch (command) {
         case TelegramCommands.start:
@@ -62,7 +58,16 @@ export class Telegram {
           this.sendMessage(chatId, resp);
           break;
 
+        case TelegramCommands.help:
+          this.sendMessage(chatId, helpText);
+          break;
+
         case TelegramCommands.generate:
+          const paramsSplitted = params.split('-');
+          const numOfLetters = paramsSplitted[0];
+          const letters = paramsSplitted[1];
+
+          this.sendMessage(chatId, `numOfLetters: ${ numOfLetters } | letters: ${ letters }`);
           break;
 
         default:
