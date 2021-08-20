@@ -19,6 +19,59 @@ export class Utils {
     return addedDate.toDate();
   }
 
+  public static ConvertPersianNum2Latin(num: string): number {
+    let res: any = '';
+
+    for (const digit of num) {
+      switch (digit) {
+        case '۰':
+          res += '0';
+          break;
+
+        case '۱':
+          res += '1';
+          break;
+
+        case '۲':
+          res += '2';
+          break;
+
+        case '۳':
+          res += '3';
+          break;
+
+        case '۴':
+          res += '4';
+          break;
+
+        case '۵':
+          res += '5';
+          break;
+
+        case '۶':
+          res += '6';
+          break;
+
+        case '۷':
+          res += '7';
+          break;
+
+        case '۸':
+          res += '8';
+          break;
+
+        case '۹':
+          res += '9';
+          break;
+
+        default:
+          res += digit;
+      }
+    }
+
+    return +res;
+  }
+
   public static convertKeyVal2Obj(keyVal: Array<string>): any {
     const objKeyVal = {};
 

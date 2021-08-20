@@ -25,7 +25,7 @@ export class Telegram {
       const isCommandMode = match[0][0] === '/';
 
       const helpText = `کافیست برای دریافت واژه‌ها از فرمان generate/ با فرمت زیر استفاده شود:
-/generate {تعداد حرف‌های واژه‌ها خروجی}-{لیست حرف‌ها به‌صورت به‌هم چسبیده}
+/generate{لیست حرف‌ها}-{تعداد حرف‌های خروجی}
 
 برای مثال:
 /generate ۵-ابپتثج
@@ -66,7 +66,7 @@ export class Telegram {
 
         case TelegramCommands.generate:
           const paramsSplitted = params.split('-');
-          const paramNumOfLetters = +paramsSplitted[0];
+          const paramNumOfLetters = Utils.ConvertPersianNum2Latin(paramsSplitted[0]);
           const paramLetters = paramsSplitted[1];
 
           const foundRes = Utils.generateLetters(paramNumOfLetters, paramLetters.split(''));
