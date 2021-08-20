@@ -19,7 +19,7 @@ export class Telegram {
 
   public startListening(): void {
     this.telegramBot.onText(/(.+)/, (msg: any, match: any) => {
-      Utils.consoleLog(`message received: ${ JSON.stringify(msg) } | match: ${ match[0][0] }`);
+      Utils.consoleLog(`message received: ${ JSON.stringify(msg) } | match: ${ match[0] }`);
 
       const chatId = msg.chat.id;
       const isCommandMode = match[0][0] === '/';
@@ -42,6 +42,8 @@ export class Telegram {
       const msgSplitted = match[0].substring(1).split(' ');
       const command = msgSplitted[0] as TelegramCommands;
       const params = msgSplitted[2];
+
+      Utils.consoleLog(`${ command }|${ params }`);
 
       switch (command) {
         case TelegramCommands.start:
