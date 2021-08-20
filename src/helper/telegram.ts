@@ -75,7 +75,12 @@ export class Telegram {
 
           this.sendMessage(chatId, `numOfLetters: ${ JSON.stringify(foundRes) }`);
           break;
-      });
+
+        default:
+          this.sendMessage(chatId, `فرمان وارد شده معتبر نیست!\n\n${ helpText }`);
+          break;
+      }
+    });
   }
 
   public sendBroadcastMessage(msg: string) {
