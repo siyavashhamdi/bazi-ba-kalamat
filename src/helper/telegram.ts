@@ -75,7 +75,7 @@ export class Telegram {
 
 تعداد واژه‌های یافت‌شده: ${ foundRes.length }
 
-لیست واژه‌ها: ${ foundRes.length }
+لیست واژه‌ها: ${ foundRes.length }`);
           break;
 
         default:
