@@ -39,7 +39,7 @@ export class Telegram {
         return;
       }
 
-      const msgSplitted = match[0].substring(1).split(' ');
+      const msgSplitted: Array<string> = match[0].substring(1).split(' ');
       const command = msgSplitted[0] as TelegramCommands;
       const params = msgSplitted[1];
 
@@ -66,8 +66,8 @@ export class Telegram {
 
         case TelegramCommands.generate:
           const paramsSplitted = params.split('-');
-          const paramNumOfLetters: number = paramsSplitted[0];
-          const paramLetters: string = paramsSplitted[1];
+          const paramNumOfLetters = +paramsSplitted[0];
+          const paramLetters = paramsSplitted[1];
 
           this.sendMessage(chatId, `numOfLetters: ${ paramNumOfLetters } | letters: ${ paramLetters }`);
 
