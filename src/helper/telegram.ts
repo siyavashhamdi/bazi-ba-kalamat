@@ -18,8 +18,8 @@ export class Telegram {
   private options: TelegramBotOptions;
 
   public startListening(): void {
-    this.telegramBot.onText((msg: any) => {
-      Utils.consoleLog(`message received: ${ JSON.stringify(msg) }`);
+    this.telegramBot.onText(/(.+)/, (msg: any, _match: any) => {
+      Utils.consoleLog(`message received: ${ JSON.stringify(msg) }, match: ${ JSON.stringify(_match) }`);
 
       const chatId = msg.chat.id;
       const isCommandMode = msg[0] === '/';
@@ -38,7 +38,7 @@ export class Telegram {
         return;
       }
 
-      const command = msg as TelegramCommands;
+      const command = msg.substring as TelegramCommands;
 
       switch (command) {
         case TelegramCommands.start:
