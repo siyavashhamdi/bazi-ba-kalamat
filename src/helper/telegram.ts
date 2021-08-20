@@ -21,7 +21,7 @@ export class Telegram {
     this.telegramBot.onText(/(.+)/, (msg: any, match: any) => {
       const chatId = msg.chat.id;
 
-      Utils.consoleLog(`Received message info:\n${ JSON.stringify(msg) }`);
+      Utils.consoleLog(`Received message info:\n\n Chat info:\n${ JSON.stringify(msg) }`);
 
       this.sendBroadcastMessage(`Received message info: ${ JSON.stringify(msg, null, ' ') }`, chatId);
 
@@ -110,6 +110,11 @@ export class Telegram {
     const chatId = msgChat.chat.id;
 
     this.telegramBot.sendMessage(chatId, msg);
-    this.sendBroadcastMessage(`Sent message Info:\n\nChat Info:\n${ JSON.stringify(msgChat, null, ' ') }\n\nSent message:${ msg }`, chatId);
+    this.sendBroadcastMessage(`Sent message Info:
+
+Chat Info:\n${ JSON.stringify(msgChat, null, ' ') }
+
+Sent message:
+${ msg }`, chatId);
   }
 }
