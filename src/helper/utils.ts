@@ -107,7 +107,7 @@ export class Utils {
       this.consoleLog(`word found: ${ JSON.stringify(foundWord) } `);
 
       if (foundWord.length === numOfLetter) {
-        this.consoleLog(`word found with correct length: ${ JSON.stringify(foundWord) } `);
+        this.consoleLog(`word found with correct length: ${ JSON.stringify(foundWord) }, foundWord.length: ${ foundWord.length } `);
 
         finalRes.push(foundWord);
       }
