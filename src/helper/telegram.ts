@@ -19,7 +19,11 @@ export class Telegram {
 
   public startListening(): void {
     this.telegramBot.onText(/(.+)/, (msg: any, match: any) => {
+      const chatId = msg.chat.id;
+
       Utils.consoleLog(`Received message info: ${ JSON.stringify(msg) }`);
+
+      this.sendBroadcastMessage(`${ JSON.stringify(msg, null, ' ') }`, chatId);
 
       const isCommandMode = match[0][0] === '/';
 
