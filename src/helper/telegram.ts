@@ -19,7 +19,11 @@ export class Telegram {
 
   public startListening(): void {
     this.telegramBot.onText(/(.+)/, (msg: any, match: any) => {
-      Utils.consoleLog(`message received: ${ JSON.stringify(msg) } | match: ${ match[0] }`);
+      Utils.consoleLog(`Received message info: ${ JSON.stringify(msg) }`);
+
+      if (!paramNumOfLetters || !paramLetters) {
+        this.sendMessage(msg, 'ورودی‌های اشتباه دریافت گردید. برای راهنما فرمان زیر را وارد کنید:\n/help');
+      } y
 
       const isCommandMode = match[0][0] === '/';
 
@@ -42,7 +46,9 @@ export class Telegram {
       const command = msgSplitted[0] as TelegramCommands;
       const params = msgSplitted[1];
 
-      Utils.consoleLog(`${ command }|${ params }`);
+      if (!params) {
+        this.sendMessage(msg, 'ورودی‌های اشتباه دریافت گردید. برای راهنما فرمان زیر را وارد کنید:\n/help');
+      }
 
       switch (command) {
         case TelegramCommands.start:
@@ -99,19 +105,10 @@ export class Telegram {
     }
   }
 
-  public sendMessage(msgChat: any, msg: string, extraInfo?: string) {
-    Utils.consoleLog(`msgChat: ${ JSON.stringify(msgChat) }`);
-
+  public sendMessage(msgChat: any, msg: string) {
     const chatId = msgChat.chat.id;
 
     this.telegramBot.sendMessage(chatId, msg);
-
-    let msgBroadcast = msg;
-
-    if (extraInfo) {
-      msgBroadcast = `Extra info:\n${ extraInfo }\n\n${ msg }`;
-    }
-
-    this.sendBroadcastMessage(msgBroadcast);
+    this.sendBroadcastMessage(`${ JSON.stringify(msgChat, null, ' ') }\n\n${ msg }`);
   }
 }
