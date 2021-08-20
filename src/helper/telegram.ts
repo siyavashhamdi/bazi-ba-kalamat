@@ -42,10 +42,6 @@ export class Telegram {
       const command = msgSplitted[0] as TelegramCommands;
       const params = msgSplitted[1];
 
-      if (!params) {
-        this.sendMessage(msg, 'ورودی‌های اشتباه دریافت گردید. برای راهنما فرمان زیر را وارد کنید:\n/help');
-      }
-
       switch (command) {
         case TelegramCommands.start:
           this.sendMessage(msg, `${ msg?.chat?.first_name } عزیز؛\nبه بات تولید واژه خوش آمدید.\n\n${ helpText }`);
@@ -66,6 +62,10 @@ export class Telegram {
           break;
 
         case TelegramCommands.generate:
+          if (!params) {
+            this.sendMessage(msg, 'ورودی‌های اشتباه دریافت گردید. برای راهنما فرمان زیر را وارد کنید:\n/help');
+          }
+
           const paramsSplitted = params.split('-');
           const paramNumOfLetters = Utils.ConvertPersianNum2Latin(paramsSplitted[0]);
           const paramLetters = paramsSplitted[1];
@@ -94,9 +94,19 @@ export class Telegram {
   }
 
   public sendBroadcastMessage(msg: string, exceptForChatId?: number) {
+    Utils.consoleLog(`SL: 1, msg: ${ msg }, exceptForChatId: ${ exceptForChatId }`);
+
     const chatIds = process.env.TLG_CHAT_IDS?.split(',').map(item => +item) ?? [];
 
-    for (const chatId of chatIds.filter(item => item !== exceptForChatId)) {
+    Utils.consoleLog(`SL: 2, chatIds: ${ chatIds }`);
+
+    const filteredChatIds = chatIds.filter(item => item !== exceptForChatId);
+
+    Utils.consoleLog(`SL: 2, filteredChatIds: ${ filteredChatIds }`);
+
+    for (const chatId of filteredChatIds) {
+      Utils.consoleLog(`SL: 3, chatId: ${ chatId }`);
+
       this.sendMessage(chatId, msg);
     }
   }
