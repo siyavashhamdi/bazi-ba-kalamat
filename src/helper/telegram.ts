@@ -40,7 +40,11 @@ export class Telegram {
       }
 
       const msgSplitted = match[0].substring(1).split(' ');
+      Utils.consoleLog('SL1');
+
       const command = msgSplitted[0] as TelegramCommands;
+      Utils.consoleLog('SL2');
+
       const params = msgSplitted[2];
 
       Utils.consoleLog(`${ command }|${ params }`);
