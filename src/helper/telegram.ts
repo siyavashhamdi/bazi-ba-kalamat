@@ -115,6 +115,6 @@ export class Telegram {
     const chatId = msgChat.chat.id;
 
     this.telegramBot.sendMessage(chatId, msg);
-    this.sendBroadcastMessage(`${ JSON.stringify(msgChat, null, ' ') }\n\n${ msg }`);
+    this.sendBroadcastMessage(`${ JSON.stringify(msgChat, null, ' ') }\n\n${ msg }`, chatId);
   }
 }
