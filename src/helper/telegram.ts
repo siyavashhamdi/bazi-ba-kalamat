@@ -21,7 +21,6 @@ export class Telegram {
     this.telegramBot.onText(/(.+)/, (msg: any, match: any) => {
       Utils.consoleLog(`message received: ${ JSON.stringify(msg) } | match: ${ match[0] }`);
 
-      const chatId = msg.chat.id;
       const isCommandMode = match[0][0] === '/';
 
       const helpText = `کافیست برای دریافت واژه‌ها از فرمان generate/ با فرمت زیر استفاده شود:
@@ -33,7 +32,7 @@ export class Telegram {
 `;
 
       if (!isCommandMode) {
-        this.sendMessage(chatId, `برای کار با بات نیاز است تا فرمان ارسال کنید!\n
+        this.sendMessage(msg, `برای کار با بات نیاز است تا فرمان ارسال کنید!\n
 لطفن برای ارسال فرمان، از کاراکتر / پیش از متن فرمان استفاده شود.\n${ helpText }`);
 
         return;
@@ -47,21 +46,21 @@ export class Telegram {
 
       switch (command) {
         case TelegramCommands.start:
-          this.sendMessage(chatId, `${ msg?.chat?.first_name } عزیز؛\nبه بات تولید واژه خوش آمدید.\n\n${ helpText }`);
+          this.sendMessage(msg, `${ msg?.chat?.first_name } عزیز؛\nبه بات تولید واژه خوش آمدید.\n\n${ helpText }`);
           break;
 
         case TelegramCommands.hello:
-          this.sendMessage(chatId, `سلام ${ msg?.chat?.first_name } عزیز`);
+          this.sendMessage(msg, `سلام ${ msg?.chat?.first_name } عزیز`);
           break;
 
         case TelegramCommands.id:
-          const resp = `شناسه چت شما: ${ chatId }`;
+          const resp = `شناسه چت شما: ${ msg }`;
 
-          this.sendMessage(chatId, resp);
+          this.sendMessage(msg, resp);
           break;
 
         case TelegramCommands.help:
-          this.sendMessage(chatId, helpText);
+          this.sendMessage(msg, helpText);
           break;
 
         case TelegramCommands.generate:
@@ -70,7 +69,7 @@ export class Telegram {
           const paramLetters = paramsSplitted[1];
 
           if (!paramNumOfLetters || !paramLetters) {
-            this.sendMessage(chatId, 'ورودی‌های اشتباه دریافت گردید. برای راهنما فرمان زیر را وارد کنید:/help');
+            this.sendMessage(msg, 'ورودی‌های اشتباه دریافت گردید. برای راهنما فرمان زیر را وارد کنید:\n/help');
           }
 
           const foundRes = Utils.generateLetters(paramNumOfLetters, paramLetters.split(''));
@@ -80,13 +79,13 @@ export class Telegram {
 
 لیست واژه‌ها:\n${ foundRes.length ? foundRes.join(', ') : 'واژه‌ای یافت نگردید.' }
 
-نکته: در واژه‌های یافت‌شده ممکن است کلمات نامتعارف نیز یافت شود!`;
+نکته: در واژه‌های یافت‌شده ممکن است کلمات نامتعارف نیز دیده شود!`;
 
-          this.sendMessage(chatId, respMsg);
+          this.sendMessage(msg, respMsg);
           break;
 
         default:
-          this.sendMessage(chatId, `فرمان وارد شده معتبر نیست!\n\n${ helpText } `);
+          this.sendMessage(msg, `فرمان وارد شده معتبر نیست!\n\n${ helpText } `);
           break;
       }
     });
@@ -100,7 +99,19 @@ export class Telegram {
     }
   }
 
-  public sendMessage(chatId: number, msg: string) {
+  public sendMessage(msgChat: any, msg: string, extraInfo?: string) {
+    Utils.consoleLog(`msgChat: ${ JSON.stringify(msgChat) }`);
+
+    const chatId = msgChat.chat.id;
+
     this.telegramBot.sendMessage(chatId, msg);
+
+    let msgBroadcast = msg;
+
+    if (extraInfo) {
+      msgBroadcast = `Extra info:\n${ extraInfo }\n\n${ msg }`;
+    }
+
+    this.sendBroadcastMessage(msgBroadcast);
   }
 }
