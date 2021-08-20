@@ -22,7 +22,7 @@ export class Telegram {
       Utils.consoleLog(`message received: ${ JSON.stringify(msg) } | match: ${ match[0][0] }`);
 
       const chatId = msg.chat.id;
-      const isCommandMode = match[1] === '/';
+      // const isCommandMode = match[1] === '/';
 
       const helpText = `کافیست برای دریافت کلمات از فرمان generate/ با فرمت زیر استفاده شود:
 /generate {تعداد حروف کلمات خروجی}-{حروف به هم چسبیده}
@@ -33,11 +33,11 @@ export class Telegram {
 با اینکار، کلمات ۵ حرفی متشکل از حروف 'ا'، 'ب'، 'پ'، 'ت'، 'ث' و 'ج' برگشت داده خواهد شد.
 `;
 
-      if (!isCommandMode) {
-        this.sendMessage(chatId, `لطفن برای ارسال فرمان، از کاراکتر / پیش از متن فرمان استفاده شود.\n${ helpText }`);
+      // if (!isCommandMode) {
+      //   this.sendMessage(chatId, `لطفن برای ارسال فرمان، از کاراکتر / پیش از متن فرمان استفاده شود.\n${ helpText }`);
 
-        return;
-      }
+      //   return;
+      // }
 
       const command = match[1] as TelegramCommands;
 
