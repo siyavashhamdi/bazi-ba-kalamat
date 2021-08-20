@@ -23,6 +23,9 @@ export class Telegram {
 
       const chatId = msg.chat.id;
       const isCommandMode = match[0][0] === '/';
+
+      Utils.consoleLog(`isCommandMode: ${ isCommandMode }`);
+
       const helpText = `کافیست برای دریافت کلمات از فرمان generate/ با فرمت زیر استفاده شود:
 /تولید {حروف به هم چسبیده} {تعداد حروف کلمات خروجی}
 
