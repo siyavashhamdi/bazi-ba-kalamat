@@ -18,11 +18,11 @@ export class Telegram {
   private options: TelegramBotOptions;
 
   public startListening(): void {
-    this.telegramBot.onText(/(.+)/, (msg: any, _match: any) => {
+    this.telegramBot.onText(/(.+)/, (msg: any, match: any) => {
       Utils.consoleLog(`message received: ${ JSON.stringify(msg) }, match: ${ JSON.stringify(_match) }`);
 
       const chatId = msg.chat.id;
-      const isCommandMode = msg[0] === '/';
+      const isCommandMode = match[0][0] === '/';
       const helpText = `کافیست برای دریافت کلمات از فرمان /تولید با فرمت زیر استفاده شود:
 /تولید {حروف به هم چسبیده} {تعداد حروف کلمات خروجی}
 
@@ -38,7 +38,7 @@ export class Telegram {
         return;
       }
 
-      const command = msg.substring as TelegramCommands;
+      const command = match[0] as TelegramCommands;
 
       switch (command) {
         case TelegramCommands.start:
