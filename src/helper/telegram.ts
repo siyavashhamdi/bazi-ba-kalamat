@@ -66,8 +66,8 @@ export class Telegram {
 
         case TelegramCommands.generate:
           const paramsSplitted = params.split('-');
-          const paramNumOfLetters = paramsSplitted[0];
-          const paramLetters = paramsSplitted[1];
+          const paramNumOfLetters: number = paramsSplitted[0];
+          const paramLetters: string = paramsSplitted[1];
 
           this.sendMessage(chatId, `numOfLetters: ${ paramNumOfLetters } | letters: ${ paramLetters }`);
 
