@@ -27,7 +27,7 @@ export class Telegram {
           break;
 
         case TelegramCommands.hello:
-          this.sendMessage(chatId, `Hello dear ${ JSON.stringify(msg, null, '  ') }`);
+          this.sendMessage(chatId, `Hello ${ msg.first_name }`);
           break;
 
         case TelegramCommands.id:
