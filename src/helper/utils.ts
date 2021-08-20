@@ -1,6 +1,7 @@
 import * as moment from 'moment-timezone';
 import { appendFileSync, existsSync, mkdirSync } from 'fs';
 import { exec } from 'child_process';
+import { words } from '../constant';
 
 export class Utils {
   public static zeroPad = (num: unknown, places: number): string => String(num).padStart(places, '0');
@@ -72,5 +73,38 @@ export class Utils {
         callback();
       }
     }, 10 * 60 * 1000);
+  }
+
+  public static generateLetters(numOfLetter: number, letters: Array<string>) {
+    let foundWords: Array<string> = [];
+    for (const word of words) {
+      let isFound = true;
+
+      word.split('').forEach((itm) => {
+        if (!letters.includes(itm)) {
+          isFound = false;
+        }
+      });
+
+      if (isFound) {
+        foundWords.push(word);
+      }
+    }
+
+    foundWords = foundWords.filter((item, pos, self) => {
+      return self.indexOf(item) === pos;
+    });
+
+    foundWords = foundWords.sort();
+
+    const finalRes: Array<string> = [];
+
+    for (const t of foundWords) {
+      if (t.length === numOfLetter) {
+        finalRes.push(t);
+      }
+    }
+
+    return finalRes;
   }
 }

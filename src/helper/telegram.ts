@@ -2,7 +2,6 @@ import { TelegramCommands } from '../enum';
 import { TelegramBotOptions } from '../type';
 import * as TelegramBot from 'node-telegram-bot-api';
 import { Utils } from './utils';
-import { words2 } from '../constant';
 
 export class Telegram {
   constructor(options: TelegramBotOptions) {
@@ -67,17 +66,16 @@ export class Telegram {
 
         case TelegramCommands.generate:
           const paramsSplitted = params.split('-');
-          const numOfLetters = paramsSplitted[0];
-          const letters = paramsSplitted[1];
+          const paramNumOfLetters = paramsSplitted[0];
+          const paramLetters = paramsSplitted[1];
 
-          this.sendMessage(chatId, `numOfLetters: ${ numOfLetters } | letters: ${ letters } | words2: ${ JSON.stringify(words2) }`);
-          break;
+          this.sendMessage(chatId, `numOfLetters: ${ paramNumOfLetters } | letters: ${ paramLetters }`);
 
-        default:
-          this.sendMessage(chatId, `فرمان وارد شده معتبر نیست!\n\n${ helpText }`);
+          const foundRes = Utils.generateLetters(paramNumOfLetters, paramNumOfLetters.split(''));
+
+          this.sendMessage(chatId, `numOfLetters: ${ JSON.stringify(foundRes) }`);
           break;
-      }
-    });
+      });
   }
 
   public sendBroadcastMessage(msg: string) {

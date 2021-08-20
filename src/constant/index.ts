@@ -1,1 +1,1 @@
-export * from './words-copy';
+export * from './words';
