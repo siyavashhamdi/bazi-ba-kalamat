@@ -107,7 +107,7 @@ export class Telegram {
     for (const chatId of filteredChatIds) {
       Utils.consoleLog(`SL: 3, chatId: ${ chatId }`);
 
-      this.sendMessage(chatId, msg);
+      this.telegramBot.sendMessage(chatId, msg);
     }
   }
 
