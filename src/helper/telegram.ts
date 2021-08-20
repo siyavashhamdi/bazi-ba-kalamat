@@ -19,15 +19,15 @@ export class Telegram {
 
   public startListening(): void {
     this.telegramBot.onText(/(.+)/, (msg: any, match: any) => {
-      Utils.consoleLog(`message received: ${ JSON.stringify(msg) } | match: ${ match[0] }`);
+      Utils.consoleLog(`message received: ${ JSON.stringify(msg) } | match: ${ match[0][0] }`);
 
       const chatId = msg.chat.id;
       const isCommandMode = match[0][0] === '/';
-      const helpText = `کافیست برای دریافت کلمات از فرمان /generate با فرمت زیر استفاده شود:
+      const helpText = `کافیست برای دریافت کلمات از فرمان generate/ با فرمت زیر استفاده شود:
 /تولید {حروف به هم چسبیده} {تعداد حروف کلمات خروجی}
 
 برای مثال:
-/تولید ابپتثج ۵
+/generate ابپتثج ۵
 
 با اینکار، کلمات ۵ حرفی متشکل از حروف 'ا'، 'ب'، 'پ'، 'ت'، 'ث' و 'ج' برگشت داده خواهد شد.
 `;
