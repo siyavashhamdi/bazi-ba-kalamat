@@ -3,5 +3,6 @@ export enum TelegramCommands {
     hello = 'hello',
     id = 'id',
     help = 'help',
+    siyavash = 'siyavash',
     generate = 'generate',
 }
