@@ -21,10 +21,6 @@ export class Telegram {
     this.telegramBot.onText(/(.+)/, (msg: any, match: any) => {
       Utils.consoleLog(`Received message info: ${ JSON.stringify(msg) }`);
 
-      if (!paramNumOfLetters || !paramLetters) {
-        this.sendMessage(msg, 'ورودی‌های اشتباه دریافت گردید. برای راهنما فرمان زیر را وارد کنید:\n/help');
-      } y
-
       const isCommandMode = match[0][0] === '/';
 
       const helpText = `کافیست برای دریافت واژه‌ها از فرمان generate/ با فرمت زیر استفاده شود:
