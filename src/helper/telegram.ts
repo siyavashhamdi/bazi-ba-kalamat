@@ -24,13 +24,13 @@ export class Telegram {
       const chatId = msg.chat.id;
       const isCommandMode = match[0][0] === '/';
 
-      const helpText = `کافیست برای دریافت کلمات از فرمان generate/ با فرمت زیر استفاده شود:
-/generate {تعداد حروف کلمات خروجی}-{حروف به هم چسبیده}
+      const helpText = `کافیست برای دریافت واژه‌ها از فرمان generate/ با فرمت زیر استفاده شود:
+/generate {تعداد حرف‌های واژه‌ها خروجی}-{لیست حرف‌ها به‌صورت به‌هم چسبیده}
 
 برای مثال:
 /generate ۵-ابپتثج
 
-با اینکار، کلمات ۵ حرفی متشکل از حروف 'ا'، 'ب'، 'پ'، 'ت'، 'ث' و 'ج' برگشت داده خواهد شد.
+با اینکار، واژه‌های ۵ حرفی متشکل از حرف‌های 'ا'، 'ب'، 'پ'، 'ت'، 'ث' و 'ج' برگشت داده خواهد شد.
 `;
 
       if (!isCommandMode) {
@@ -47,7 +47,7 @@ export class Telegram {
 
       switch (command) {
         case TelegramCommands.start:
-          this.sendMessage(chatId, `${ msg?.chat?.first_name } عزیز؛\nبه بات تولید کلمه خوش آمدید.\n\n${ helpText }`);
+          this.sendMessage(chatId, `${ msg?.chat?.first_name } عزیز؛\nبه بات تولید واژه خوش آمدید.\n\n${ helpText }`);
           break;
 
         case TelegramCommands.hello:
@@ -69,13 +69,13 @@ export class Telegram {
           const paramNumOfLetters = +paramsSplitted[0];
           const paramLetters = paramsSplitted[1];
 
-          this.sendMessage(chatId, `numOfLetters: ${ paramNumOfLetters } | letters: ${ paramLetters }`);
-
           const foundRes = Utils.generateLetters(paramNumOfLetters, paramLetters.split(''));
 
-          Utils.consoleLog(`foundRes: ${ JSON.stringify(foundRes) }`);
+          this.sendMessage(chatId, `جستجوی واژه‌های ${ paramNumOfLetters } حرفی برای حرف‌های ${ paramLetters.split('-') }:
 
-          this.sendMessage(chatId, `numOfLetters: ${ JSON.stringify(foundRes) }`);
+تعداد واژه‌های یافت‌شده: ${ foundRes.length }
+
+لیست واژه‌ها: ${ foundRes.length }
           break;
 
         default:

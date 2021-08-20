@@ -99,18 +99,10 @@ export class Utils {
 
     foundWords = foundWords.sort();
 
-    this.consoleLog(`words found: ${ JSON.stringify(foundWords) } `);
-
     const finalRes: Array<string> = [];
 
     for (const foundWord of foundWords) {
-      this.consoleLog(`word found: ${ JSON.stringify(foundWord) } `);
-
-      this.consoleLog(`word found with correct length: ${ JSON.stringify(foundWord) }, foundWord.length: ${ foundWord.length } `);
-
       if (foundWord.length === numOfLetter) {
-        this.consoleLog(`word found with correct length: ${ JSON.stringify(foundWord) } `);
-
         finalRes.push(foundWord);
       }
     }
