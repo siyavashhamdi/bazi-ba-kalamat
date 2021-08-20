@@ -40,6 +40,9 @@ export class Telegram {
       }
 
       const msgSplitted = match[0].substring(1).split(' ');
+
+      Utils.consoleLog(`SL:1, ${ JSON.stringify(msgSplitted) }`);
+
       const command = msgSplitted[0] as TelegramCommands;
 
       switch (command) {
