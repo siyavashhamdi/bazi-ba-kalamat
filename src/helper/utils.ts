@@ -81,24 +81,25 @@ export class Utils {
     for (const word of wordsA) {
       let isFound = true;
 
-      this.consoleLog(`word: ${ word }`);
       for (const ltr of word) {
         if (!letters.includes(ltr)) {
-          this.consoleLog(`include: ${ JSON.stringify(letters) } - ${ ltr } } `);
           isFound = false;
           break;
         }
       }
 
       if (isFound) {
-        this.consoleLog(`word found: ${ word } `);
         foundWords.push(word);
       }
     }
 
+    this.consoleLog(`words found1: ${ foundWords } `);
+
     foundWords = foundWords.filter((item, pos, self) => {
       return self.indexOf(item) === pos;
     });
+
+    this.consoleLog(`words found2: ${ foundWords } `);
 
     foundWords = foundWords.sort();
 
