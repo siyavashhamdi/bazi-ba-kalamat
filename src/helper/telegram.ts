@@ -17,21 +17,36 @@ export class Telegram {
   private options: TelegramBotOptions;
 
   public startListening(): void {
-    this.telegramBot.onText(/\/(.+)/, (msg: any, match: any) => {
-      const command = match[1] as TelegramCommands;
+    this.telegramBot.onText((msg: any, match: any) => {
       const chatId = msg.chat.id;
+      const isCommandMode = msg[0] === '/';
+      const helpText = `کافیست برای دریافت کلمات از فرمان /تولید با فرمت زیر استفاده شود:
+/تولید {حروف به هم چسبیده} {تعداد حروف کلمات خروجی}
+
+برای مثال:
+/تولید ابپتثج ۵
+
+با اینکار، کلمات ۵ حرفی متشکل از حروف 'ا'، 'ب'، 'پ'، 'ت'، 'ث' و 'ج' برگشت داده خواهد شد.
+`;
+
+      if (!isCommandMode) {
+        this.sendMessage(chatId, `لطفن برای ارسال فرمان، از کاراکتر / پیش از متن فرمان استفاده شود.\n${ helpText }`);
+      }
+
+      const command = match[1] as TelegramCommands;
 
       switch (command) {
         case TelegramCommands.start:
-          this.sendMessage(chatId, `Dear ${ msg.first_name }\nWelcome to the Siyavas's bot`);
+        case TelegramCommands.startFa:
+          this.sendMessage(chatId, `${ msg?.chat?.first_name } عزیز؛\nبه بات تولید کلمه خوش آمدید.\n\n${ helpText }`);
           break;
 
         case TelegramCommands.hello:
-          this.sendMessage(chatId, `Hello ${ msg?.chat?.first_name }`);
+          this.sendMessage(chatId, `سلام ${ msg?.chat?.first_name } عزیز`);
           break;
 
         case TelegramCommands.id:
-          const resp = `Your chat id is: ${ chatId }`;
+          const resp = `شناسه چت شما: ${ chatId }`;
 
           this.sendMessage(chatId, resp);
           break;
@@ -40,7 +55,7 @@ export class Telegram {
           break;
 
         default:
-          this.sendMessage(chatId, 'Command is not valid!');
+          this.sendMessage(chatId, `فرمان وارد شده معتبر نیست!\n\n${ helpText }`);
           break;
       }
     });

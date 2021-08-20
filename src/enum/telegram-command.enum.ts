@@ -1,6 +1,8 @@
 export enum TelegramCommands {
     start = 'start',
-    hello = 'hello',
-    id = 'id',
-    generate = 'generate',
+    startFa = 'شروع',
+    hello = 'سلام',
+    id = 'شناسه',
+    help = 'راهنمایی',
+    generate = 'تولید',
 }
