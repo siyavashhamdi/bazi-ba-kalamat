@@ -71,7 +71,7 @@ export class Telegram {
 
           this.sendMessage(chatId, `numOfLetters: ${ paramNumOfLetters } | letters: ${ paramLetters }`);
 
-          const foundRes = Utils.generateLetters(paramNumOfLetters, paramNumOfLetters.split(''));
+          const foundRes = Utils.generateLetters(paramNumOfLetters, paramLetters.split(''));
 
           Utils.consoleLog(`foundRes: ${ JSON.stringify(foundRes) }`);
 
