@@ -1,9 +1,6 @@
-export var ObjectStyles = {
-    [
-        "آب",
-        "ئی‌ئی‌اس‌تی",
-        "ئی‌ئی‌تی",
-    ]
-};
-
-export default words;
+export const words2 =
+	[
+		"آب",
+		"ئی‌ئی‌اس‌تی",
+		"ئی‌ئی‌تی",
+	];

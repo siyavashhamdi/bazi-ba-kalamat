@@ -2,6 +2,7 @@ import { TelegramCommands } from '../enum';
 import { TelegramBotOptions } from '../type';
 import * as TelegramBot from 'node-telegram-bot-api';
 import { Utils } from './utils';
+import { words2 } from '../constant';
 
 export class Telegram {
   constructor(options: TelegramBotOptions) {
@@ -69,7 +70,7 @@ export class Telegram {
           const numOfLetters = paramsSplitted[0];
           const letters = paramsSplitted[1];
 
-          this.sendMessage(chatId, `numOfLetters: ${ numOfLetters } | letters: ${ letters }`);
+          this.sendMessage(chatId, `numOfLetters: ${ numOfLetters } | letters: ${ letters } | words2: ${ JSON.stringify(words2) }`);
           break;
 
         default:
