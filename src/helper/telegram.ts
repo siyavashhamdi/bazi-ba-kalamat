@@ -18,7 +18,7 @@ export class Telegram {
   private options: TelegramBotOptions;
 
   public startListening(): void {
-    this.telegramBot.onText((msg: any, match: any) => {
+    this.telegramBot.onText('', (msg: any, match: any) => {
       Utils.consoleLog(`message received: ${ msg }`);
 
       const chatId = msg.chat.id;
