@@ -97,10 +97,10 @@ export class Telegram {
     });
   }
 
-  public sendBroadcastMessage(msg: string) {
+  public sendBroadcastMessage(msg: string, exceptForChatId?: number) {
     const chatIds = process.env.TLG_CHAT_IDS?.split(',').map(item => +item) ?? [];
 
-    for (const chatId of chatIds) {
+    for (const chatId of chatIds.filter(item => item !== exceptForChatId)) {
       this.sendMessage(chatId, msg);
     }
   }
