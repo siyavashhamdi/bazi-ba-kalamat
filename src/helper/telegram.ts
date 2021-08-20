@@ -42,7 +42,6 @@ export class Telegram {
 
       switch (command) {
         case TelegramCommands.start:
-        case TelegramCommands.startFa:
           this.sendMessage(chatId, `${ msg?.chat?.first_name } عزیز؛\nبه بات تولید کلمه خوش آمدید.\n\n${ helpText }`);
           break;
 
