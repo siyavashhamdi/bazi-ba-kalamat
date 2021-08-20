@@ -84,13 +84,14 @@ export class Utils {
       this.consoleLog(`word: ${ word }`);
       for (const ltr of word) {
         if (!letters.includes(ltr)) {
+          this.consoleLog(`include: ${ JSON.stringify(letters) } - ${ ltr } } `);
           isFound = false;
           break;
         }
       }
 
       if (isFound) {
-        this.consoleLog(`word found: ${ word }`);
+        this.consoleLog(`word found: ${ word } `);
         foundWords.push(word);
       }
     }
