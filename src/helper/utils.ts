@@ -81,6 +81,7 @@ export class Utils {
     for (const word of wordsA) {
       let isFound = true;
 
+      this.consoleLog(`word: ${ word }`);
       for (const ltr of word) {
         if (!letters.includes(ltr)) {
           isFound = false;
