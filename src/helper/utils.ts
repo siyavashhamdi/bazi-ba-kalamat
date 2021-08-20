@@ -93,21 +93,21 @@ export class Utils {
       }
     }
 
-    this.consoleLog(`words found1: ${ JSON.stringify(foundWords) } `);
-
     foundWords = foundWords.filter((item, pos, self) => {
       return self.indexOf(item) === pos;
     });
 
-    this.consoleLog(`words found1: ${ JSON.stringify(foundWords) } `);
-
     foundWords = foundWords.sort();
+
+    this.consoleLog(`words found: ${ JSON.stringify(foundWords) } `);
 
     const finalRes: Array<string> = [];
 
-    for (const t of foundWords) {
-      if (t.length === numOfLetter) {
-        finalRes.push(t);
+    for (const foundWord of foundWords) {
+      this.consoleLog(`word found: ${ JSON.stringify(foundWord) } `);
+
+      if (foundWord.length === numOfLetter) {
+        finalRes.push(foundWord);
       }
     }
 
