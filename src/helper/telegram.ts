@@ -1,6 +1,7 @@
 import { TelegramCommands } from '../enum';
 import { TelegramBotOptions } from '../type';
 import * as TelegramBot from 'node-telegram-bot-api';
+import { Utils } from './utils';
 
 export class Telegram {
   constructor(options: TelegramBotOptions) {
@@ -18,6 +19,8 @@ export class Telegram {
 
   public startListening(): void {
     this.telegramBot.onText((msg: any, match: any) => {
+      Utils.consoleLog(`message received: ${ msg }`);
+
       const chatId = msg.chat.id;
       const isCommandMode = msg[0] === '/';
       const helpText = `کافیست برای دریافت کلمات از فرمان /تولید با فرمت زیر استفاده شود:
