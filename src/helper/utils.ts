@@ -1,7 +1,7 @@
 import * as moment from 'moment-timezone';
 import { appendFileSync, existsSync, mkdirSync } from 'fs';
 import { exec } from 'child_process';
-import { words } from '../constant';
+import { wordsA } from '../constant';
 
 export class Utils {
   public static zeroPad = (num: unknown, places: number): string => String(num).padStart(places, '0');
@@ -77,7 +77,7 @@ export class Utils {
 
   public static generateLetters(numOfLetter: number, letters: Array<string>) {
     let foundWords: Array<string> = [];
-    for (const word of words) {
+    for (const word of wordsA) {
       let isFound = true;
 
       word.split('').forEach((itm) => {
