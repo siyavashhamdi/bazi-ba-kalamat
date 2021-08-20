@@ -1,4 +1,4 @@
-export const wordsB07
+export const wordsB07 =
   [
     'مدالات',
     'سوسیس',
