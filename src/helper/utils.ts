@@ -77,6 +77,9 @@ export class Utils {
 
   public static generateLetters(numOfLetter: number, letters: Array<string>) {
     let foundWords: Array<string> = [];
+
+    this.consoleLog(wordsA.length);
+
     for (const word of wordsA) {
       let isFound = true;
 
