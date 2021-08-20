@@ -1,7 +1,7 @@
 import * as moment from 'moment-timezone';
 import { appendFileSync, existsSync, mkdirSync } from 'fs';
 import { exec } from 'child_process';
-import { wordsA } from '../constant';
+import wordsA from '../constant';
 
 export class Utils {
   public static zeroPad = (num: unknown, places: number): string => String(num).padStart(places, '0');

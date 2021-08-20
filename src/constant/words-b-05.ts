@@ -1,4 +1,4 @@
-export const wordsB1 =
+export const wordsB05 =
   [
     'زبونگیری کردن',
     'حریره‌ها',

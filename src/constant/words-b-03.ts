@@ -1,4 +1,4 @@
-export const wordsB1 =
+export const wordsB03 =
   [
     'آلومینون',
     'پر شاخ و برگی',
