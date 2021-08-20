@@ -38,7 +38,7 @@ export class Telegram {
         return;
       }
 
-      const command = match[1] as TelegramCommands;
+      const command = msg as TelegramCommands;
 
       switch (command) {
         case TelegramCommands.start:
