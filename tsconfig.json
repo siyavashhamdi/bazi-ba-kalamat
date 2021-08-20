@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "outDir": "dist",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2019",
+      "esnext.string"
+    ],
+    "target": "es2019",
+    "module": "commonjs",
+    "sourceMap": true,
+    "removeComments": true,
+    "downlevelIteration": false,
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "noUnusedParameters": true
+  },
+  "files": [
+    "src/index.ts"
+  ],
+  "include": [
+    "src/typings.d.ts",
+    "src/migrations/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts"
+  ]
+}
