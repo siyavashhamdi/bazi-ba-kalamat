@@ -80,11 +80,12 @@ export class Utils {
     for (const word of wordsA) {
       let isFound = true;
 
-      word.split('').forEach((itm) => {
-        if (!letters.includes(itm)) {
+      for (const ltr of word) {
+        if (!letters.includes(ltr)) {
           isFound = false;
+          break;
         }
-      });
+      }
 
       if (isFound) {
         foundWords.push(word);
