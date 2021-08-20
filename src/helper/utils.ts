@@ -93,13 +93,13 @@ export class Utils {
       }
     }
 
-    this.consoleLog(`words found1: ${ foundWords } `);
+    this.consoleLog(`words found1: ${ JSON.stringify(foundWords) } `);
 
     foundWords = foundWords.filter((item, pos, self) => {
       return self.indexOf(item) === pos;
     });
 
-    this.consoleLog(`words found2: ${ foundWords } `);
+    this.consoleLog(`words found1: ${ JSON.stringify(foundWords) } `);
 
     foundWords = foundWords.sort();
 
