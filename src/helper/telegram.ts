@@ -25,16 +25,16 @@ export class Telegram {
       const isCommandMode = match[0][0] === '/';
 
       const helpText = `کافیست برای دریافت واژه‌ها از فرمان generate/ با فرمت زیر استفاده شود:
-/generate{لیست حرف‌ها}-{تعداد حرف‌های خروجی}
+/generate {لیست حرف‌ها}-{تعداد حرف‌های خروجی}
 
 برای مثال:
 /generate ۵-ابپتثج
-
 با اینکار، واژه‌های ۵ حرفی متشکل از حرف‌های 'ا'، 'ب'، 'پ'، 'ت'، 'ث' و 'ج' برگشت داده خواهد شد.
 `;
 
       if (!isCommandMode) {
-        this.sendMessage(chatId, `لطفن برای ارسال فرمان، از کاراکتر / پیش از متن فرمان استفاده شود.\n${ helpText }`);
+        this.sendMessage(chatId, `برای کار با بات نیاز است تا فرمان ارسال کنید!\n
+لطفن برای ارسال فرمان، از کاراکتر / پیش از متن فرمان استفاده شود.\n${ helpText }`);
 
         return;
       }
@@ -69,18 +69,24 @@ export class Telegram {
           const paramNumOfLetters = Utils.ConvertPersianNum2Latin(paramsSplitted[0]);
           const paramLetters = paramsSplitted[1];
 
+          if (!paramNumOfLetters || !paramLetters) {
+            this.sendMessage(chatId, 'ورودی‌های اشتباه دریافت گردید. برای راهنما فرمان زیر را وارد کنید:/help');
+          }
+
           const foundRes = Utils.generateLetters(paramNumOfLetters, paramLetters.split(''));
           const respMsg = `«جستجوی واژه‌های ${ paramNumOfLetters } حرفی برای حرف‌های ${ paramLetters.split('').join('-') }»
 
 تعداد واژه‌های یافت‌شده: ${ foundRes.length } عدد
 
-لیست واژه‌ها:\n${ foundRes.length ? foundRes.join(', ') : 'واژه‌ای یافت نگردید.' }`;
+لیست واژه‌ها:\n${ foundRes.length ? foundRes.join(', ') : 'واژه‌ای یافت نگردید.' }
+
+نکته: در واژه‌های یافت‌شده ممکن است کلمات نامتعارف نیز یافت شود!`;
 
           this.sendMessage(chatId, respMsg);
           break;
 
         default:
-          this.sendMessage(chatId, `فرمان وارد شده معتبر نیست!${ helpText } `);
+          this.sendMessage(chatId, `فرمان وارد شده معتبر نیست!\n\n${ helpText } `);
           break;
       }
     });
