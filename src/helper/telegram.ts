@@ -114,7 +114,7 @@ export class Telegram {
 
   public sendMessage(msgChat: any, msgMain: string) {
     const chatId = msgChat.chat.id;
-    const splittedMsg = msgMain.match(/.{1,1000}/g); // Splite each 1000 letters as a chunk
+    const splittedMsg = msgMain.match(/(.|[\r\n]){1,4000}/g); // Splite each 1000 letters as a chunk
 
     if (!splittedMsg) {
       return;
