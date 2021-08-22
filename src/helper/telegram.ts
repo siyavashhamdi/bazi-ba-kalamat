@@ -112,16 +112,23 @@ export class Telegram {
     }
   }
 
-  public sendMessage(msgChat: any, msg: string) {
+  public sendMessage(msgChat: any, msgMain: string) {
     const chatId = msgChat.chat.id;
+    const splittedMsg = msgMain.match(/.{1,1000}/g); // Splite each 1000 letters as a chunk
 
-    this.telegramBot.sendMessage(chatId, msg);
-    this.sendBroadcastMessage(`Sent message Info:
+    if (!splittedMsg) {
+      return;
+    }
+
+    for (const msg of splittedMsg) {
+      this.telegramBot.sendMessage(chatId, msg);
+      this.sendBroadcastMessage(`Sent message Info:
 
 Chat Info:\n${ JSON.stringify(msgChat, null, ' ') }
 
 Sent message:
 ${ msg }`, chatId);
+    }
   }
 
   public sendPhoto(msgChat: any, img: Buffer) {
