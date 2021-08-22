@@ -120,14 +120,19 @@ export class Telegram {
       return;
     }
 
+    let augDelay = 0;
     for (const msg of splittedMsg) {
-      this.telegramBot.sendMessage(chatId, msg);
-      this.sendBroadcastMessage(`Sent message Info:
+      setTimeout(() => {
+        this.telegramBot.sendMessage(chatId, msg);
+        this.sendBroadcastMessage(`Sent message Info:
 
-Chat Info:\n${ JSON.stringify(msgChat, null, ' ') }
+  Chat Info:\n${ JSON.stringify(msgChat, null, ' ') }
 
-Sent message:
-${ msg }`, chatId);
+  Sent message:
+  ${ msg }`, chatId);
+      }, augDelay);
+
+      augDelay += 500;
     }
   }
 
